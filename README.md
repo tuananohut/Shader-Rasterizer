@@ -1,4 +1,4 @@
-# Shader Rasterizer
+# Wang Tiles
 
 This project is a small experimental CPU based shader rasterizer. 
 It generates procedural textures as PNG images using simple fragment shaders. 

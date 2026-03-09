@@ -13,6 +13,7 @@
 
 typedef RGB (*Frag_Shader)(UV uv);
 typedef uint32_t RGBA32;
+typedef uint32_t BLTR; 
 
 RGBA32 make_rgba32(float r, float g, float b) 
 {
@@ -58,7 +59,7 @@ RGB circles(UV uv)
   
   float my_circle = vec2f_sqrlen(vec2f_sub(vec2fs(0.5f), uv));
   
-  Vec3f color; 
+  RGB color; 
   
   if (my_circle < r1*r1) 
   {
@@ -76,6 +77,36 @@ RGB circles(UV uv)
     color = vec3f(0.094f, 0.094f, 0.094f);
   
   return color; 
+}
+
+// bltr -> bottom, left, top, right
+RGB wang(BLTR bltr, UV uv) 
+{
+  float r = 0.5f; 
+  static const RGB colors[] = 
+  {
+    vec3f(1.f, 0.f, 0.f),
+    vec3f(0.f, 1.f, 1.f),
+    
+    // vec3f(1.f, 1.f, 0.f),
+    // vec3f(0.f, 0.f, 1.f),
+  };
+  static_assert(sizeof(colors) / sizeof(colors[0]) == 2, "colors array must have exactly 2 elements"); 
+  
+  static const Vec2f sides[4] = 
+  {
+    vec2f(1.f, 0.5f),
+    vec2f(0.5f, 0.f),
+    vec2f(0.f, 0.5f),
+    vec2f(0.5f, 1.f),
+  };
+  
+  for (size_t i = 0; i < 4; ++ii) 
+  {
+    Vec2f p = sides[i]; 
+    float t = 1.f ;
+  }
+  
 }
 
 void generate_image32(Tile *tile, Frag_Shader shader) 
